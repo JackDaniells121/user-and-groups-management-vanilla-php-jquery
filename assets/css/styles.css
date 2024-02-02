@@ -1,0 +1,60 @@
+table {
+    border-collapse: collapse;
+    /*width: 100%;*/
+}
+
+table td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: white;
+    color: lightgrey;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mr-2 {
+    margin-right: 2rem;
+}
+
+.mr-4 {
+    margin-right: 4rem;
+}
+.btn {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: small;
+    font-weight: bold;
+}
+
+.password {
+    background-color: transparent;
+    border: 0px solid;
+    height: 20px;
+    width: 160px;
+    color: #CCC;
+    outline: none;
+    width: 5rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}

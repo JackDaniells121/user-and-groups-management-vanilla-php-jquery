@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management System</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tabs.css">
+</head>
+<body>
+
+<!-- Top Navigation Section-->
+<ul id="tabs">
+    <li><a href="#tab1">User New</a></li>
+    <li><a href="#tab2" onclick="showUsers('userList')">User List</a></li>
+    <li><a href="#tab3">Group New</a></li>
+    <li><a href="#tab4" onclick="loadGroups()">Group List</a></li>
+</ul>
+
+<!-- New User Section -->
+<div class="container" id="tab1">
+    <h2>Create new User</h2>
+    <form id="addUserForm" class="box-row">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+        <label for="birthDate">Birth Date:</label>
+        <input type="date" id="birthDate">
+        <button type="button" onclick="addUser()">Add User</button>
+    </form>
+</div>
+
+<!-- User Management Section -->
+<div class="container" id="tab2">
+    <h2>User Management</h2>
+    <table class="mb-1" id="userList"></table>
+</div>
+
+<!-- New Group Section -->
+<div class="container" id="tab3">
+    <h2>Create new Group</h2>
+    <form id="addGroupForm">
+        <label for="groupName">Group Name:</label>
+        <input type="text" id="groupName" required>
+        <button type="button" onclick="addGroup()">Add Group</button>
+    </form>
+</div>
+
+<!-- Group Management Section -->
+<div class="container" id="tab4">
+    <h2>Group Management</h2>
+    <div class="row">
+        <div clas="column">
+            <h4>Groups</h4>
+            <table class="mb-1 mr-4" id="groupList"></table>
+        </div>
+
+        <div clas="column">
+            <h4>Users in group</h4>
+            <table class="mb-1" id="usersInGroup"></table>
+        </div>
+    </div>
+
+</div>
+
+<!-- Confirm Action Dialog-->
+<dialog id="confirmDialog">
+    <form>
+        <p>Are You sure to delete record ?</p>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="1">Confirm</button>
+        </div>
+    </form>
+</dialog>
+
+<!-- User Edit Dialog -->
+<dialog id="editUserDialog">
+    <form id="editUserForm" class="box-row">
+            <input type="hidden" id="userId" name="userId" required>
+        <div class="row mb-1">
+            <label for="usernameNew">Username:</label>
+            <input type="text" id="usernameNew" name="userName" required>
+        </div>
+        <div class="row mb-1">
+            <label for="passwordNew">Password:</label>
+            <input type="password" id="passwordNew" name="password" required>
+        </div>
+        <div class="row mb-1">
+            <label for="firstNameNew">First Name:</label>
+            <input type="text" id="firstNameNew" name="firstName" required>
+        </div>
+        <div class="row mb-1">
+            <label for="lastNameNew">Last Name:</label>
+            <input type="text" id="lastNameNew" name="lastName" required>
+        </div>
+        <div class="row mb-1">
+            <label for="birthDateNew">Birth Date:</label>
+            <input type="date" id="birthDateNew" name="birthDate">
+        </div>
+        <div class="row mb-1">
+            <button type="button" onclick="editUserPost()">Save Edit</button>
+        </div>
+
+        <div class="mb-1">
+            Already in groups:
+            <ul id="alreadyInGroups">
+            </ul>
+        </div>
+
+        <p>Add to group</p>
+        <div class="row mb-1">
+            <select id="groupsSelect">
+                <option>1</option>
+            </select>
+        </div>
+        <div class="row mb-1">
+            <button type="button" onclick="addUserToGroup()">Add to group</button>
+        </div>
+    </form>
+    <form>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+        </div>
+    </form>
+</dialog>
+
+<!-- Group Edit Dialog -->
+<dialog id="editGroupDialog">
+    <form id="editGroupForm" class="box-row">
+        <input type="hidden" id="groupId" required>
+        <div class="row mb-1">
+            <label for="groupnameNew">Name:</label>
+            <input type="text" id="groupnameNew" required>
+        </div>
+    </form>
+    <div class="row mb-1">
+        <button type="button" onclick="editGroupPost()">Save Edit</button>
+    </div>
+    <form>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+        </div>
+    </form>
+</dialog>
+<script src="assets/js/script.js?=1z"></script>
+<script src="assets/js/tabs.js"></script>
+<script src="assets/js/viewpass.js?=z"></script>
+<script src="assets/js/dialog.js"></script>
+</body>
+</html>
