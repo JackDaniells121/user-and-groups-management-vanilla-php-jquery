@@ -100,8 +100,6 @@ function removeUser(id) {
 }
 
 async function editUser(id) {
-    // Implement user editing logic here
-
     let modal = document.getElementById("editUserDialog");
 
     let user = await getUser(id);
@@ -273,8 +271,6 @@ function removeGroup(id) {
         $.post("server.php?action=removeGroup", {id: id}, function () {
             loadGroups();
         });
-        // loadGroups();
-        // id = null;
     });
 }
 async function editGroup(groupId) {
@@ -308,8 +304,3 @@ function removeUserFromGroup(userId, groupId) {
         id = null;
     });
 }
-
-function getGroupCount(groupId) {
-
-}
-// Implement similar functions for editing and removing groups
