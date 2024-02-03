@@ -7,7 +7,6 @@ class BaseValidator
 
     public function checkRequired(array $required, array $array)
     {
-
         foreach ($required as $property) {
             if (empty($array[$property])) {
                 $this->errors[$property] = "$property is required.";

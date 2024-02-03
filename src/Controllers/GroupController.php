@@ -7,40 +7,49 @@ use Responses\Response;
 
 class GroupController extends BaseController
 {
-    public function add($post)
+    public function add()
     {
         $builder = new GroupBuilder();
         $input = $builder->create(
-            $post['groupname'],
+            $this->post['groupname'],
         );
         if (!$input) {
-            return new Response(400, 0);
+            return new Response(400,['message'=>'validation failed']);
         }
+
         $group = new Group();
-        $group->insert($input);
+        $result = $group->insert($input);
+
+        if (false == $result) {
+            return new Response(400, ['message'=>'failed to insert new group']);
+        }
+
+        return new Response(200);
     }
 
     public function list()
     {
         $group = new Group();
-//        return new Response(200, $group->list());
         return new Response(200, $group->listExtended());
     }
 
-    public function removeGroup($id)
+    public function removeGroup()
     {
         $group = new Group();
-        $result = $group->remove($id);
-        return new Response(200, $result);
+        if (false == empty($this->post['id'])) {
+            $result = $group->remove($this->post['id']);
+            return new Response(200, $result);
+        }
+        return new Response(400);
     }
 
-    public function removeUserFromGroup($post)
+    public function removeUserFromGroup()
     {
-        if (false == empty($post['userId']) &&
-            false == empty($post['groupId'])) {
+        if (false == empty($this->post['userId']) &&
+            false == empty($this->post['groupId'])) {
 
-            $userId = $post['userId'];
-            $groupId = $post['groupId'];
+            $userId = $this->post['userId'];
+            $groupId = $this->post['groupId'];
             $group = new Group();
             $result = $group->removeUserFromGroup($userId, $groupId);
             return new Response(200, $result);

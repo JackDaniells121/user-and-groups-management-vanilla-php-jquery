@@ -93,9 +93,8 @@ function removeUser(id) {
     $('#confirmBtn').click(function(){
         modal.close();
         $.post("server.php?action=removeUser", {id: id}, function () {
-            loadUsers();
+            showUsers('userList');
         });
-        loadUsers();
         id = null;
     });
 }
@@ -268,14 +267,14 @@ function addGroup() {
 function removeGroup(id) {
     let modal = document.getElementById("confirmDialog");
     modal.showModal();
-
+    console.log('remove group ' + id);
     $('#confirmBtn').click(function(){
         modal.close();
         $.post("server.php?action=removeGroup", {id: id}, function () {
             loadGroups();
         });
-        loadGroups();
-        id = null;
+        // loadGroups();
+        // id = null;
     });
 }
 async function editGroup(groupId) {

@@ -8,36 +8,43 @@ use Responses\Response;
 
 class UserController extends BaseController
 {
-    public function add($post)
+    public function add()
     {
         $builder = new UserBuilder();
         $input = $builder->create(
-            $post['username'],
-            $post['password'],
-            $post['firstName'],
-            $post['lastName'],
-            $post['birthDate']
+            $this->post['username'],
+            $this->post['password'],
+            $this->post['firstName'],
+            $this->post['lastName'],
+            $this->post['birthDate']
         );
         if (!$input) {
-            return new Response(400, 0);
+            return new Response(400, ['message'=>'validation failed']);
         }
+
         $user = new User();
-        $user->insert($input);
+        $result = $user->insert($input);
+
+        if (!$result) {
+            return new Response(400, ['message'=>'Not unique username']);
+        }
+
+        return new Response(200);
     }
 
-    public function list(array $post)
+    public function list()
     {
         $user = new User();
-        if (false == empty($post['groupId'])) {
+        if (false == empty($this->post['groupId'])) {
             return new Response(200,
-                $user->getUsersFromGroup($post['groupId']));
+                $user->getUsersFromGroup($this->post['groupId']));
         }
         else {
             return new Response(200, $user->list());
         }
     }
 
-    public function getUser(array $post)
+    public function getUser()
     {
         $user = new User();
         if (false == empty($post['userId'])) {
@@ -48,10 +55,10 @@ class UserController extends BaseController
             return new Response(400);
         }
     }
-    public function removeUser(int $id)
+    public function removeUser()
     {
         $user = new User();
-        $result = $user->remove($id);
+        $result = $user->remove($this->post['id']);
         return new Response(200, $result);
     }
 

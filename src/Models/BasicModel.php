@@ -46,7 +46,12 @@ class BasicModel
             ...array_values($array)
         );
 
-        return $stmt->execute();
+        try {
+            return $stmt->execute();
+        }
+        catch (\Exception $exception) {
+            return false;
+        }
     }
 
     public function remove($id)
@@ -54,7 +59,6 @@ class BasicModel
         return $this->conn->query("DELETE FROM $this->tableName WHERE id = $id");
     }
 
-    // Edit user
     public function update($array)
     {
         $id = $array['id'];
@@ -76,10 +80,7 @@ class BasicModel
     public function __destruct()
     {
         // Close the database connection
-        function closeConnection()
-        {
-            global $conn;
-            $conn->close();
-        }
+        global $conn;
+        $this->conn->close();
     }
 }

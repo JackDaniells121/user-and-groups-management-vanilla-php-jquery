@@ -5,17 +5,6 @@ use Controllers\GroupController;
 use Controllers\UserController;
 
 
-// db.php - Connection to the database
-//$servername = "localhost";
-//$username = "felg_dent_php_user";
-//$password = "1234";
-//$dbname = "felg_dent_php_test";
-//
-//$conn = new mysqli($servername, $username, $password, $dbname);
-//if ($conn->connect_error) {
-//    die("Connection failed: " . $conn->connect_error);
-//}
-
 $userController = new UserController();
 $userController->setPost($_POST);
 $groupController = new GroupController();
@@ -25,16 +14,15 @@ $action = $_GET['action'];
 
 switch ($action) {
     case 'addUser':
-        $userController->add($_POST);
+        $userController->add();
         break;
     case 'getUsers':
-        $ret = $userController->list($_POST);
+        $ret = $userController->list();
         break;
     case 'getUser':
-        $ret = $userController->getUser($_POST);
+        $ret = $userController->getUser();
         break;
     case 'editUser':
-        $test = $_POST;
         $ret = $userController->editUser();
         break;
     case 'addUserToGroup':
@@ -44,10 +32,10 @@ switch ($action) {
         $ret = $userController->getUserGroups();
         break;
     case 'removeUser':
-        $userController->removeUser($_POST['id']);
+        $userController->removeUser();
         break;
     case 'addGroup':
-        $groupController->add($_POST);
+        $groupController->add();
         break;
     case 'getGroup':
         $groupController->getGroup();
@@ -59,16 +47,9 @@ switch ($action) {
         $ret = $groupController->list();
         break;
     case 'removeGroup':
-        $groupController->removeGroup($_POST['id']);
+        $groupController->removeGroup();
         break;
     case 'removeUserFromGroup':
-        $groupController->removeUserFromGroup($_POST);
+        $groupController->removeUserFromGroup();
         break;
 }
-
-// Close the database connection
-function closeConnection() {
-    global $conn;
-    $conn->close();
-}
-
