@@ -3,16 +3,8 @@
 <h3 align="center">Simple User and Groups Manager</h3>
 
   <p align="center">
-    Web application in Vanilla PHP and jqeury.
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    Web application in Vanilla PHP and jqeury with custom css.
+    
   </p>
 
 
@@ -34,6 +26,12 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+        <ul>
+            <li><a href="#functions">Functions</a></li>       
+            <li><a href="#endpoints">Endpoints</a></li>
+        </ul>
+    <li><a href="#ideas">Ideas</a></li></li>
+    <li><a href="#code">Code</a></li></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -101,9 +99,9 @@ This simple app is recruitment task solution - original requirements in Docs/req
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- USAGE EXAMPLES -->
 ## Usage
+
+### Functions 
 
 User management:
 - add new user 
@@ -118,63 +116,71 @@ Group management:
 - edit group
 - show users that belong to group
 
-List of endpoints {POST data}:
+### Endpoints
+List of all endpoints:
 
-- server.php?action=addUser 
-  - {username, password, firstName, lastName, birthDate}
-- server.php?action=getUsers 
-  - optional {groupID}
-- server.php?action=getUser
-  - {userId}
-- server.php?action=editUser
-  - {username, password, firstName, lastName, birthDate}
-- server.php?action=addUserToGroup
-  - {userId, groupId}
-- server.php?action=
-- server.php?action=
-- server.php?action=
-- server.php?action=
+url {POST data}
+
+- server.php?action=**addUser** {username, password, firstName, lastName, birthDate}
+- server.php?action=**getUsers** optional {groupID}
+- server.php?action=**getUser** {userId}
+- server.php?action=**editUser** {userId, username, password, firstName, lastName, birthDate}
+- server.php?action=**addUserToGroup** {userId, groupId}
+- server.php?action=**getUserGroups** {userId}
+- server.php?action=**removeUser** {userId}
+- server.php?action=**addGroup** {groupName}
+- server.php?action=**getGroup** {groupId}
+- server.php?action=**editGroup** {groupName, groupId}
+- server.php?action=**getGroups**
+- server.php?action=**removeGroup** {id}
+- server.php?action=**removeUserFromGroup** {userId, groupId}
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- IDEAS -->
+## IDEAS
+1. Authorization and authentication.
 
+Web app or api like this should be protected by authorization and authentication. 
+
+It could be realized by implementing simple login system (create Auth.php), create group Admins and put there users that will have access to app.
+
+App could generate time token on login and store it in client web browser and server database - all requests will be available only by passing valid token. This involved both frontend and backend changes (add token to forms, create new column in users table to store token and expiry time)
+
+
+<!-- CODEBASE -->
+## CODEBASE
+
+Vanilla PHP was requirement. Code is separated to folders:
+src/
+- **Builders**
+- **Controllers**
+- **Models**
+- **Responses**
+- **Validators**
+- **server.php**
+
+1. **Builders** - prepare object (return array with specific properties), run validation (validation could be moved to controllers)
+2. **Controllers** - delegate action to proper model
+3. **Models** - runs sql queries and returns results
+4. **Response** - simple class to pack response data and http code to unified app response structure
+5. **Validators** - validates input data, normalizes data
+6. **server.php** - delegates http request to controllers
+
+**BaseController.php** - provides method to pass $_POST data
+
+**BaseModel.php** - mysqli 'db driver', It's not exactly driver, but it has impelemented basic sql queries linke select, insert, list etc.
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
+
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
 [PHP-url]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white
