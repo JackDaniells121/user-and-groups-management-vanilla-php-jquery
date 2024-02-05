@@ -30,6 +30,7 @@
             <li><a href="#functions">Functions</a></li>       
             <li><a href="#endpoints">Endpoints</a></li>
         </ul>
+    <li><a href="#database">Database</a></li></li>
     <li><a href="#ideas">Ideas</a></li></li>
     <li><a href="#code">Code</a></li></li>
     <li><a href="#license">License</a></li>
@@ -136,6 +137,10 @@ url {POST data}
 - server.php?action=**removeUserFromGroup** {userId, groupId}
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- DATABASE -->
+## DATABASE
+![Alt Text](Docs/db-structure-diagram.png)
 
 <!-- IDEAS -->
 ## IDEAS
