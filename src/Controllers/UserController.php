@@ -47,8 +47,8 @@ class UserController extends BaseController
     public function getUser()
     {
         $user = new User();
-        if (false == empty($post['userId'])) {
-            $result = $user->selectRow($post['userId']);
+        if (false == empty($this->post['userId'])) {
+            $result = $user->selectRow($this->post['userId']);
             return new Response(200, $result);
         }
         else {
