@@ -4,8 +4,8 @@ namespace Models;
 
 class Group extends BasicModel
 {
-    public string $tableName = 'user_groups';
-    public array $fields = [
+    protected string $tableName = 'user_groups';
+    protected array $fields = [
         'group_name',
     ];
 

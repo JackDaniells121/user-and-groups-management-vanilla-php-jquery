@@ -4,7 +4,7 @@ namespace Controllers;
 
 class BaseController
 {
-    public $post;
+    protected $post;
 
     public function setPost(array $post)
     {

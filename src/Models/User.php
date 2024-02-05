@@ -6,8 +6,8 @@ use http\Env\Response;
 
 class User extends BasicModel
 {
-    public string $tableName = 'users';
-    public array $fields = [
+    protected string $tableName = 'users';
+    protected array $fields = [
         'username',
         'password',
         'first_name',
