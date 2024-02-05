@@ -31,7 +31,7 @@
             <li><a href="#endpoints">Endpoints</a></li>
         </ul>
     <li><a href="#database">Database</a></li></li>
-    <li><a href="#ideas">Ideas</a></li></li>
+    <li><a href="#ideas">Concerns</a></li></li>
     <li><a href="#code">Code</a></li></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -143,7 +143,7 @@ url {POST data}
 ![Alt Text](Docs/db-structure-diagram.png)
 
 <!-- IDEAS -->
-## IDEAS
+## CONCERNS
 1. Authorization and authentication.
 
 Web app or api like this should be protected by authorization and authentication. 
@@ -152,6 +152,9 @@ It could be realized by implementing simple login system (create Auth.php), crea
 
 App could generate time token on login and store it in client web browser and server database - all requests will be available only by passing valid token. This involved both frontend and backend changes (add token to forms, create new column in users table to store token and expiry time)
 
+2. User passwords storage
+
+Always You should avoid to storage passwords in plain text in database. Well known practise is to store hash of password and then when user login use hash function to check if input and stored hash matches.
 
 <!-- CODEBASE -->
 ## CODEBASE
