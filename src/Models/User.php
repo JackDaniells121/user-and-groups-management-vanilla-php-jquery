@@ -22,7 +22,10 @@ class User extends BasicModel
                     -- JOIN `users` 
                     WHERE t2.`group_id` = $groupId";
 
-        $result = $this->conn->query($query);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $groupId);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -35,8 +38,9 @@ class User extends BasicModel
         $userGroupsIds = array_column($userGroups, 'group_id');
 
         if (!in_array($post['groupId'], $userGroupsIds)) {
-            $query = "INSERT INTO group_user_assignment (group_id, user_id) VALUES ($groupId, $userId)";
+            $query = "INSERT INTO group_user_assignment (group_id, user_id) VALUES (?,?)";
             $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("ii",  $groupId, $userId);
             $stmt->execute();
         }
         else {
@@ -49,9 +53,12 @@ class User extends BasicModel
         $userId = $post['userId'];
         $query = "SELECT t2.group_name, t1.group_id FROM group_user_assignment t1
                     JOIN user_groups t2 ON t2.id = t1.group_id
-                    WHERE t1.`user_id` = $userId";
+                    WHERE t1.`user_id` = ?";
 
-        $result = $this->conn->query($query);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }

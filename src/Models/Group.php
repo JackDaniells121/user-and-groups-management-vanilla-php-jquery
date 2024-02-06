@@ -11,7 +11,10 @@ class Group extends BasicModel
 
     public function removeUserFromGroup($userId, $groupId)
     {
-        return $this->conn->query("DELETE FROM group_user_assignment WHERE user_id = $userId AND group_id = $groupId");
+        $query = "DELETE FROM group_user_assignment WHERE user_id = ? AND group_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $userId, $groupId);
+        return $stmt->execute();
     }
 
     public function listExtended()

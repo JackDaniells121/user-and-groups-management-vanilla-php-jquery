@@ -20,9 +20,12 @@ class BasicModel
 
     public function selectRow($id)
     {
-        $query = "SELECT * FROM $this->tableName WHERE id = $id";
+        $query = "SELECT * FROM $this->tableName WHERE id = ?";
 
-        $result = $this->conn->query($query);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -56,7 +59,10 @@ class BasicModel
 
     public function remove($id)
     {
-        return $this->conn->query("DELETE FROM $this->tableName WHERE id = $id");
+        $query = "DELETE FROM $this->tableName WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 
     public function update($array)
