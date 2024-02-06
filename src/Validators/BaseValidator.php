@@ -18,6 +18,7 @@ class BaseValidator
     {
         foreach ($fields as $property) {
             $array[$property] = htmlspecialchars($array[$property], ENT_QUOTES, 'UTF-8');
+            $array[$property] = strip_tags($array[$property]);
         }
         return $array;
     }
